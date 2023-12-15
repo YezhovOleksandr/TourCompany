@@ -5,7 +5,10 @@
 }
 
 <h1>@ViewData["Tittle"]</h1>
+
 <div>
+
+
     <form asp-controller="Tour">
         <button class="btn btn-primary" asp-action="Create" formmethod="get">Add Tour</button> 
         @foreach (var item in Model)

@@ -18,7 +18,6 @@ namespace TourCompany.Controllers
         [HttpGet("/Tours")]
         public IActionResult Index()
         {
-            
             var tours = _tourService.GetAllToursAsync().Result;
             return View(tours);
         }

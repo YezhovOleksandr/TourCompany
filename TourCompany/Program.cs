@@ -1,5 +1,7 @@
 using DataAccess.Data;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Models.Models;
 using TourCompany.Repositories;
 using TourCompany.Repositories.impl;
 using TourCompany.Servises;
@@ -14,20 +16,31 @@ namespace TourCompany
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
-            builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
-            builder.Services.AddRazorPages();
 
 
 
+            builder.Services.AddAuthentication();
+            builder.Services.AddAuthorization();
             //Add DB context
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
             {
                 options.UseSqlServer(builder.Configuration.GetConnectionString("ApplicationDbContext"));
             });
 
+            builder.Services.AddDbContext<AuthDbContext>(options =>
+            {
+                options.UseSqlServer(builder.Configuration.GetConnectionString("ApplicationDbContext"));
+            });
+
+            builder.Services.AddIdentity<User, IdentityRole>()
+                .AddEntityFrameworkStores<AuthDbContext>();
+
             //Dependency injection
             builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             builder.Services.AddScoped(typeof(ITourService), typeof(TourService));
+
+            builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
+            builder.Services.AddRazorPages();
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -43,6 +56,7 @@ namespace TourCompany
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.MapControllerRoute(
