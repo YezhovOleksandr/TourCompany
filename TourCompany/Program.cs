@@ -1,5 +1,9 @@
 using DataAccess.Data;
 using Microsoft.EntityFrameworkCore;
+using TourCompany.Repositories;
+using TourCompany.Repositories.impl;
+using TourCompany.Servises;
+using TourCompany.Servises.impl;
 
 namespace TourCompany
 {
@@ -10,13 +14,20 @@ namespace TourCompany
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
-            builder.Services.AddControllersWithViews();
+            builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
+            builder.Services.AddRazorPages();
+
+
 
             //Add DB context
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
             {
                 options.UseSqlServer(builder.Configuration.GetConnectionString("ApplicationDbContext"));
             });
+
+            //Dependency injection
+            builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+            builder.Services.AddScoped(typeof(ITourService), typeof(TourService));
 
             var app = builder.Build();
 

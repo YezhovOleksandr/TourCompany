@@ -8,10 +8,10 @@ namespace TourCompany.Repositories.impl
         private readonly ApplicationDbContext _context;
         private readonly DbSet<TEntity> _dbSet;
 
-        public GenericRepository(ApplicationDbContext context, DbSet<TEntity> dbSet)
+        public GenericRepository(ApplicationDbContext context)
         {
             _context = context;
-            _dbSet = dbSet;
+            _dbSet = _context.Set<TEntity>();
         }
 
         public DbSet<TEntity> GetEntity()
