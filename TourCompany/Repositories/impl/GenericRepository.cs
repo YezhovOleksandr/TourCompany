@@ -22,6 +22,7 @@ namespace TourCompany.Repositories.impl
         public async Task AddAsync(TEntity entity)
         {
             await _dbSet.AddAsync(entity);
+            Save();
         }
 
         public async Task DeleteByIdAsync(int id)

@@ -1,0 +1,26 @@
+﻿@model IEnumerable<Models.Models.Tour>
+
+@{
+    ViewData["Tittle"] = "Tour List";
+}
+
+<h1>@ViewData["Tittle"]</h1>
+<div>
+    <form asp-controller="Tour">
+        <button class="btn btn-primary" asp-action="Create" formmethod="get">Add Tour</button> 
+        @foreach (var item in Model)
+        {
+
+            <div class="card" style="width: 18rem;">
+                <img class="card-img-top" src="..." alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">@item.TourName</h5>
+                    <p class="card-text">@item.TourShortDescription</p>
+                    <button class="btn btn-success" asp-action="Edit" formmethod="get" asp-route-id="@item.TourId">Edit</button>
+                    <button asp-action="TourDetails" asp-route-id="@item.TourId" class="btn btn-primary">Go See More</button>
+                </div>
+            </div>
+            <br />
+        }
+    </form>
+</div>

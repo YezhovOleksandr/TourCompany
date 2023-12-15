@@ -1,0 +1,21 @@
+﻿@model Models.Models.Tour
+
+<form method="post" asp-action="Create" asp-controller="Tour">
+    <div class="mb-3">
+        <label asp-for="TourName" class="form-label">Tour Name</label>
+        <input type="text" class="form-control" value="@Model.TourName" asp-for="TourName">
+
+        <label asp-for="TourShortDescription" class="form-label">Tour Short Description</label>
+        <input type="text" class="form-control" value="@Model.TourShortDescription" asp-for="TourShortDescription">
+               
+        <label asp-for="TourDescription" class="form-label">Tour Description</label>
+        <input type="text" class="form-control" value="@Model.TourDescription" asp-for="TourDescription">
+        
+        <label asp-for="TourPrice" class="form-label">Tour Price</label>
+        <input type="text" class="form-control" value="@Model.TourPrice" asp-for="TourPrice">
+
+        <input type="file" asp-for="Image"/>
+        <div class="form-text">We'll never share your info with anyone else.</div>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>

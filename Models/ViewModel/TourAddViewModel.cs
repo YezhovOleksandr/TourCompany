@@ -1,23 +1,19 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Drawing;
-using Microsoft.AspNetCore.Http;
 
-namespace Models.Models
+namespace Models.ViewModel
 {
-    public class Tour
+    public class TourAddViewModel
     {
-        [Key]
-        public int TourId { get; set; }
-
         [Required]
         public string TourName { get; set; }
         public string TourShortDescription { get; set; }
-        public string TourDescription { get; set;}
+        public string TourDescription { get; set; }
         public double TourPrice { get; set; }
 
     }

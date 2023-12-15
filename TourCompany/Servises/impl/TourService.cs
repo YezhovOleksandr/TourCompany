@@ -1,4 +1,5 @@
 ﻿using Models.Models;
+using Models.ViewModel;
 using TourCompany.Repositories;
 
 namespace TourCompany.Servises.impl
@@ -11,9 +12,16 @@ namespace TourCompany.Servises.impl
         {
             _tourRepository = tourRepository;
         }
-        public async Task AddTourAsync(Tour tour)
+        public async Task AddTourAsync(TourAddViewModel tour)
         {
-            await _tourRepository.AddAsync(tour);
+            Tour newTour = new Tour()
+            {
+                TourName = tour.TourName,
+                TourShortDescription = tour.TourShortDescription,
+                TourDescription = tour.TourDescription,
+                TourPrice = tour.TourPrice,
+            };
+            await _tourRepository.AddAsync(newTour);
         }
 
         public async Task DeleteTourByIdAsync(int id)

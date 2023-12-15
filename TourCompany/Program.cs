@@ -28,7 +28,6 @@ namespace TourCompany
             //Dependency injection
             builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             builder.Services.AddScoped(typeof(ITourService), typeof(TourService));
-
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
