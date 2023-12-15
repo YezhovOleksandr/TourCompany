@@ -1,3 +1,6 @@
+using DataAccess.Data;
+using Microsoft.EntityFrameworkCore;
+
 namespace TourCompany
 {
     public class Program
@@ -8,6 +11,12 @@ namespace TourCompany
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+
+            //Add DB context
+            builder.Services.AddDbContext<ApplicationDbContext>(options =>
+            {
+                options.UseSqlServer(builder.Configuration.GetConnectionString("ApplicationDbContext"));
+            });
 
             var app = builder.Build();
 
