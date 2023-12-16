@@ -19,6 +19,7 @@ namespace Models.ViewModel.User
 
         [Required]
         [DataType(DataType.Password)]
+        [StringLength(20, ErrorMessage = "Поле {0} повинно мати минімум {2} і максимум {1} символ", MinimumLength = 6)]
         [Display(Name = "Пароль")]
         public string Password { get; set; }
 

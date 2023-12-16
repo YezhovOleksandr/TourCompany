@@ -17,7 +17,8 @@ namespace TourCompany
 
             // Add services to the container.
 
-
+            builder.Services.AddTransient<IPasswordValidator<User>,
+                CustomPasswordValidator>(serv => new CustomPasswordValidator(6));
 
             builder.Services.AddAuthentication();
             builder.Services.AddAuthorization();
@@ -32,7 +33,14 @@ namespace TourCompany
                 options.UseSqlServer(builder.Configuration.GetConnectionString("ApplicationDbContext"));
             });
 
-            builder.Services.AddIdentity<User, IdentityRole>()
+            builder.Services.AddIdentity<User, IdentityRole>(options =>
+            {
+                options.Password.RequiredLength = 6;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireDigit = false;
+                options.Password.RequireLowercase = false;
+                options.Password.RequireUppercase = false;
+            })
                 .AddEntityFrameworkStores<AuthDbContext>();
 
             //Dependency injection
